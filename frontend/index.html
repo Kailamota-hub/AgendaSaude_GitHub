@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AgendaSaúde - prova de conceito para agendamento digital de consultas em unidades básicas de saúde.">
+  <title>AgendaSaúde</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">+</div>
+      <div>
+        <strong>AgendaSaúde</strong>
+        <span>Agendamento simples e acessível</span>
+      </div>
+    </div>
+    <button id="logoutButton" class="button secondary hidden" type="button">Sair</button>
+  </header>
+
+  <main class="page-shell">
+    <section id="authSection" class="auth-layout">
+      <div class="hero-card">
+        <span class="eyebrow">PROVA DE CONCEITO</span>
+        <h1>Seu atendimento começa antes da consulta.</h1>
+        <p>Consulte especialidades, escolha um horário disponível e acompanhe seus agendamentos sem filas presenciais.</p>
+        <div class="feature-list">
+          <div><span>1</span><p>Faça login ou crie seu cadastro.</p></div>
+          <div><span>2</span><p>Escolha profissional, data e horário.</p></div>
+          <div><span>3</span><p>Confirme, acompanhe, cancele ou reagende.</p></div>
+        </div>
+      </div>
+
+      <div class="auth-card">
+        <div class="tabs" role="tablist">
+          <button class="tab active" id="loginTab" type="button">Entrar</button>
+          <button class="tab" id="registerTab" type="button">Criar conta</button>
+        </div>
+
+        <form id="loginForm" class="form-stack">
+          <label>E-mail
+            <input id="loginEmail" type="email" value="maria@agendasaude.demo" required autocomplete="email">
+          </label>
+          <label>Senha
+            <input id="loginPassword" type="password" value="123456" required autocomplete="current-password">
+          </label>
+          <button class="button primary" type="submit">Entrar no AgendaSaúde</button>
+          <p class="hint">Acesso de demonstração já preenchido para facilitar a apresentação.</p>
+        </form>
+
+        <form id="registerForm" class="form-stack hidden">
+          <label>Nome completo
+            <input id="registerName" type="text" minlength="3" required autocomplete="name">
+          </label>
+          <label>E-mail
+            <input id="registerEmail" type="email" required autocomplete="email">
+          </label>
+          <label>Senha
+            <input id="registerPassword" type="password" minlength="6" required autocomplete="new-password">
+          </label>
+          <button class="button primary" type="submit">Criar cadastro</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="appSection" class="hidden">
+      <div class="welcome-row">
+        <div>
+          <span class="eyebrow">ÁREA DO PACIENTE</span>
+          <h1 id="welcomeTitle">Olá!</h1>
+          <p>Escolha uma consulta e acompanhe seus agendamentos.</p>
+        </div>
+        <div class="status-pill"><span></span>Sistema disponível</div>
+      </div>
+
+      <div class="dashboard-grid">
+        <section class="panel booking-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="step-label">ETAPA PRINCIPAL</span>
+              <h2 id="bookingTitle">Agendar nova consulta</h2>
+            </div>
+            <button id="cancelRescheduleButton" class="link-button hidden" type="button">Cancelar reagendamento</button>
+          </div>
+
+          <form id="appointmentForm" class="form-grid">
+            <label>Profissional / especialidade
+              <select id="doctorSelect" required>
+                <option value="">Carregando...</option>
+              </select>
+            </label>
+            <label>Data
+              <input id="dateInput" type="date" required>
+            </label>
+            <div class="full-width">
+              <span class="field-label">Horários disponíveis</span>
+              <div id="slotsContainer" class="slots empty-state">Selecione profissional e data.</div>
+            </div>
+            <button id="appointmentSubmit" class="button primary full-width" type="submit">Confirmar agendamento</button>
+          </form>
+        </section>
+
+        <aside class="panel summary-panel">
+          <span class="step-label">RESUMO</span>
+          <h2>Minha agenda</h2>
+          <div class="stats">
+            <div><strong id="activeCount">0</strong><span>Agendadas</span></div>
+            <div><strong id="cancelledCount">0</strong><span>Canceladas</span></div>
+          </div>
+          <div class="journey-note">
+            <strong>Jornada atendida</strong>
+            <p>Acesso → escolha da consulta → confirmação → acompanhamento.</p>
+          </div>
+        </aside>
+      </div>
+
+      <section class="panel appointments-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="step-label">ACOMPANHAMENTO</span>
+            <h2>Minhas consultas</h2>
+          </div>
+          <button id="refreshButton" class="button secondary" type="button">Atualizar</button>
+        </div>
+        <div id="appointmentsList" class="appointments-list"></div>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

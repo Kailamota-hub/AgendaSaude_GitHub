@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Banco gerado em execução
+/database/agendasaude.db
+/database/agendasaude.db-shm
+/database/agendasaude.db-wal
+
+# Sistema operacional / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log

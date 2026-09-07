@@ -1,0 +1,27 @@
+# AgendaSaúde - Dependências
+# Requer Python 3.10 ou superior.
+#
+# Este projeto utiliza somente bibliotecas nativas da biblioteca padrão
+# do Python. Portanto, não há pacotes externos obrigatórios para instalar.
+#
+# Módulos utilizados pelo backend:
+# - hashlib
+# - hmac
+# - json
+# - mimetypes
+# - os
+# - secrets
+# - sqlite3
+# - datetime
+# - http
+# - pathlib
+# - urllib
+#
+# Execução do projeto:
+# python backend/app.py
+#
+# Este arquivo pode ser usado normalmente com:
+# pip install -r requirements.txt
+#
+# Como não existem dependências externas, o comando não instalará
+# pacotes adicionais.
