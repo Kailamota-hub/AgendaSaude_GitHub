@@ -142,15 +142,6 @@ A documentação dos endpoints está em [`docs/API.md`](docs/API.md).
 - MÔNICA FONTALVA SILVA
 - SERGIO LOPES MORAES
 
-## Colaboração exigida pela atividade
-
-Todos os participantes devem ser adicionados como colaboradores do repositório e possuir histórico de contribuições. O arquivo [`docs/PLANO_COLABORACAO_GITHUB.md`](docs/PLANO_COLABORACAO_GITHUB.md) contém uma sugestão de organização para garantir contribuições reais de todos os integrantes.
-
-## Vídeo de até 1 minuto
-
-O arquivo [`docs/ROTEIRO_VIDEO_1_MINUTO.md`](docs/ROTEIRO_VIDEO_1_MINUTO.md) contém um roteiro pronto. O vídeo pode ser colocado em `video/` como MP4 ou substituído por um link privado/não listado do YouTube em `video/README.md`.
-
-## Documentação acadêmica
 
 A primeira entrega está preservada em `docs/primeira-etapa/`. A documentação da segunda etapa está em `docs/Projeto_Integrador_SEGUNDA_ETAPA.docx` e `docs/ENTREGA_SEGUNDA_ETAPA.md`.
 
