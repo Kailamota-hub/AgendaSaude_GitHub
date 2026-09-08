@@ -320,19 +320,23 @@ class AgendaSaudeHandler(BaseHTTPRequestHandler):
         if error:
             self._send_error_json(error)
             return
-        with db_connection() as conn:
-            if not conn.execute("SELECT 1 FROM doctors WHERE id = ? AND active = 1", (doctor_id,)).fetchone():
-                self._send_error_json("Profissional não encontrado.", HTTPStatus.NOT_FOUND)
-                return
-            if self._slot_is_booked(conn, doctor_id, selected_date, selected_time):
-                self._send_error_json("Horário indisponível. Escolha outro horário.", HTTPStatus.CONFLICT)
-                return
-            cur = conn.execute(
-                """INSERT INTO appointments (user_id, doctor_id, appointment_date, appointment_time, status)
-                   VALUES (?, ?, ?, ?, 'AGENDADA')""",
-                (user_id, doctor_id, selected_date, selected_time),
-            )
-            conn.commit()
+        try:
+            with db_connection() as conn:
+                if not conn.execute("SELECT 1 FROM doctors WHERE id = ? AND active = 1", (doctor_id,)).fetchone():
+                    self._send_error_json("Profissional não encontrado.", HTTPStatus.NOT_FOUND)
+                    return
+                if self._slot_is_booked(conn, doctor_id, selected_date, selected_time):
+                    self._send_error_json("Horário indisponível. Escolha outro horário.", HTTPStatus.CONFLICT)
+                    return
+                cur = conn.execute(
+                    """INSERT INTO appointments (user_id, doctor_id, appointment_date, appointment_time, status)
+                       VALUES (?, ?, ?, ?, 'AGENDADA')""",
+                    (user_id, doctor_id, selected_date, selected_time),
+                )
+                conn.commit()
+        except sqlite3.IntegrityError:
+            self._send_error_json("Horário indisponível. Escolha outro horário.", HTTPStatus.CONFLICT)
+            return
         self._send_json({"message": "Consulta agendada com sucesso.", "appointment_id": cur.lastrowid}, HTTPStatus.CREATED)
 
     def _reschedule_appointment(self, user_id: int, appointment_id: int, body: dict) -> None:
@@ -343,27 +347,31 @@ class AgendaSaudeHandler(BaseHTTPRequestHandler):
         if error:
             self._send_error_json(error)
             return
-        with db_connection() as conn:
-            current = conn.execute(
-                "SELECT id FROM appointments WHERE id = ? AND user_id = ? AND status = 'AGENDADA'",
-                (appointment_id, user_id),
-            ).fetchone()
-            if not current:
-                self._send_error_json("Consulta ativa não encontrada.", HTTPStatus.NOT_FOUND)
-                return
-            if not conn.execute("SELECT 1 FROM doctors WHERE id = ? AND active = 1", (doctor_id,)).fetchone():
-                self._send_error_json("Profissional não encontrado.", HTTPStatus.NOT_FOUND)
-                return
-            if self._slot_is_booked(conn, doctor_id, selected_date, selected_time, ignore_id=appointment_id):
-                self._send_error_json("Horário indisponível. Escolha outro horário.", HTTPStatus.CONFLICT)
-                return
-            conn.execute(
-                """UPDATE appointments
-                   SET doctor_id = ?, appointment_date = ?, appointment_time = ?, updated_at = CURRENT_TIMESTAMP
-                   WHERE id = ? AND user_id = ?""",
-                (doctor_id, selected_date, selected_time, appointment_id, user_id),
-            )
-            conn.commit()
+        try:
+            with db_connection() as conn:
+                current = conn.execute(
+                    "SELECT id FROM appointments WHERE id = ? AND user_id = ? AND status = 'AGENDADA'",
+                    (appointment_id, user_id),
+                ).fetchone()
+                if not current:
+                    self._send_error_json("Consulta ativa não encontrada.", HTTPStatus.NOT_FOUND)
+                    return
+                if not conn.execute("SELECT 1 FROM doctors WHERE id = ? AND active = 1", (doctor_id,)).fetchone():
+                    self._send_error_json("Profissional não encontrado.", HTTPStatus.NOT_FOUND)
+                    return
+                if self._slot_is_booked(conn, doctor_id, selected_date, selected_time, ignore_id=appointment_id):
+                    self._send_error_json("Horário indisponível. Escolha outro horário.", HTTPStatus.CONFLICT)
+                    return
+                conn.execute(
+                    """UPDATE appointments
+                       SET doctor_id = ?, appointment_date = ?, appointment_time = ?, updated_at = CURRENT_TIMESTAMP
+                       WHERE id = ? AND user_id = ?""",
+                    (doctor_id, selected_date, selected_time, appointment_id, user_id),
+                )
+                conn.commit()
+        except sqlite3.IntegrityError:
+            self._send_error_json("Horário indisponível. Escolha outro horário.", HTTPStatus.CONFLICT)
+            return
         self._send_json({"message": "Consulta reagendada com sucesso."})
 
     @staticmethod

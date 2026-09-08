@@ -21,3 +21,4 @@ usam SQLite em memória e funções puras isoladas.
 | `test_password.py` | `password_hash` / `verify_password` — determinismo do salt, verificação de senha correta/incorreta |
 | `test_validation.py` | `_parse_positive_int`, `_valid_date`, `_validate_appointment_fields`, `row_to_dict` |
 | `test_slots.py` | `_slot_is_booked` — conflito de horário, `status = CANCELADA` ignorado, `ignore_id` no reagendamento |
+| `test_database_constraints.py` | Restrição do SQLite contra dois agendamentos ativos no mesmo horário e liberação após cancelamento |
