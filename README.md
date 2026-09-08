@@ -1,6 +1,6 @@
 # AgendaSaúde
 
-Prova de conceito do **Projeto Integrador - Segunda Etapa** do curso de Tecnologia em Análise e Desenvolvimento de Sistemas / TSI do SENAC.
+Prova de conceito do **Projeto Integrador - Segunda Etapa** do curso de Tecnologia em Análise e Desenvolvimento de Sistemas do SENAC.
 
 O projeto dá continuidade à primeira entrega, na qual foram definidos a visão do produto, o problema, o público-alvo, os stakeholders, as personas e a jornada do usuário. Nesta etapa, a jornada da paciente **Maria Aparecida Santos** foi transformada em uma aplicação funcional.
 
