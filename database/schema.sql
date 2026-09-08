@@ -34,3 +34,9 @@ ON appointments (doctor_id, appointment_date, status);
 
 CREATE INDEX IF NOT EXISTS idx_appointments_user
 ON appointments (user_id, status);
+
+-- Garante a regra de negócio mesmo quando duas requisições tentam reservar
+-- o mesmo horário ao mesmo tempo. Consultas canceladas não bloqueiam a vaga.
+CREATE UNIQUE INDEX IF NOT EXISTS uq_appointments_active_slot
+ON appointments (doctor_id, appointment_date, appointment_time)
+WHERE status = 'AGENDADA';
