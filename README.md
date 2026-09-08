@@ -97,11 +97,8 @@ AgendaSaude/
 │   │   └── Projeto_Integrador_PARTE_1_2026.docx
 │   ├── API.md
 │   ├── ARQUITETURA.md
-│   ├── COMO_PUBLICAR_NO_GITHUB.md
 │   ├── ENTREGA_SEGUNDA_ETAPA.md
-│   ├── PLANO_COLABORACAO_GITHUB.md
 │   ├── Projeto_Integrador_SEGUNDA_ETAPA.docx
-│   └── ROTEIRO_VIDEO_1_MINUTO.md
 ├── frontend/
 │   ├── app.js
 │   ├── index.html
