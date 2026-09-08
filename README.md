@@ -106,7 +106,7 @@ AgendaSaude/
 ├── scripts/
 │   └── smoke_test.py
 ├── video/
-│   └── README.md
+│   └── video_PI_2026.mp4
 ├── .gitignore
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
