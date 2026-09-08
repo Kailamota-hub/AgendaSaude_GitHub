@@ -104,6 +104,7 @@ AgendaSaude_GitHub/
 │   │   └── ReagendarConsulta.py
 │   ├── README.md
 │   ├── __init__.py
+│   ├── test_database_constraints.py
 │   ├── test_parse_positive_int.py
 │   ├── test_password.py
 │   ├── test_slots.py
@@ -370,6 +371,7 @@ Ctrl + C
 - Adriano Vinicius Leite Dutra
 - Danielle Guimaraes Albuquerque
 - Kaila Mota Silva
+- Lucas Ribeiro da Silva Moraes
 - Mônica Fontalva Silva
 - Sergio Lopes Moraes
 
