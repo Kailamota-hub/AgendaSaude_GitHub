@@ -45,8 +45,8 @@ A escolha está alinhada ao problema central identificado na primeira etapa: red
 ### Passos
 
 ```bash
-git clone URL_DO_REPOSITORIO
-cd AgendaSaude
+git clone https://github.com/Kailamota-hub/AgendaSaude_GitHub.git
+cd AgendaSaude_GitHub
 python backend/app.py
 ```
 
